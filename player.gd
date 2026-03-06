@@ -2,7 +2,11 @@ extends CharacterBody2D
 
 # Movement and Stats
 @export var speed = 400
-var health = 100 
+
+
+var health = 200
+var health_max = 100 
+var health_min = 0
 var player_alive = true
 var attack_ip = false # Attack In Progress
 var current_dir = "down" # Stores which way we are facing
@@ -82,3 +86,8 @@ func _on_attack_cooldown_timeout() -> void:
 func _on_deal_attack_timer_timeout() -> void:
 	# global.player_current_attack = false
 	attack_ip = false
+
+
+func _on_sword_area_entered(area: Area2D) -> void:
+	if area.is_in_group("hurtbox"):
+		area.take_damage()
