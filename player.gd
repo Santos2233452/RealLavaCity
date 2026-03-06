@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var speed = 400
 
 
-var health = 200
+var health = 100
 var health_max = 100 
 var health_min = 0
 var player_alive = true

@@ -85,10 +85,10 @@ rotation = -6.2831855
 position = Vector2(13, -34)
 
 [node name="HealthBar" parent="." instance=ExtResource("4_hqtel")]
-offset_left = -25.0
-offset_top = 54.0
-offset_right = 51.0
-offset_bottom = 89.0
+offset_left = -30.0
+offset_top = 34.0
+offset_right = 46.0
+offset_bottom = 69.0
 
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]

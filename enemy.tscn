@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cks6xktgwulcj"]
+[gd_scene load_steps=7 format=3 uid="uid://cks6xktgwulcj"]
 
 [ext_resource type="Script" uid="uid://cphfkquwii64c" path="res://enemy.gd" id="1_4gyqm"]
 [ext_resource type="Texture2D" uid="uid://cfv1u86mw0ru5" path="res://icon.svg" id="2_qi2p4"]
+[ext_resource type="PackedScene" uid="uid://cqf2lwbh2u8n6" path="res://health_bar.tscn" id="3_qi2p4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iifgy"]
 radius = 294.5505
@@ -37,6 +38,12 @@ shape = SubResource("RectangleShape2D_epg4t")
 position = Vector2(7, -18)
 shape = SubResource("CircleShape2D_4gyqm")
 debug_color = Color(0.9228791, 0.23156068, 0.3975508, 0.41960785)
+
+[node name="HealthBar" parent="." instance=ExtResource("3_qi2p4")]
+offset_left = -39.0
+offset_top = -126.0
+offset_right = 60.0
+offset_bottom = -83.0
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
