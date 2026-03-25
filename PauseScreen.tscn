@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1iy5sjde1u07"]
+
+[ext_resource type="FontFile" uid="uid://ddqh421582gtb" path="res://Rubik-Bold.ttf" id="1_070lc"]
+[ext_resource type="Shader" uid="uid://dkrtls338yflp" path="res://blur.gdshader" id="1_sf4dv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhcno"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.007055227, 0.0012508034, 0.00034229067, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oddr5"]
+bg_color = Color(0.3410474, 0.10912935, 0.112493835, 1)
+
+[sub_resource type="Theme" id="Theme_m852v"]
+default_font = ExtResource("1_070lc")
+default_font_size = 42
+Button/styles/normal = SubResource("StyleBoxFlat_hhcno")
+Label/font_sizes/font_size = 64
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_oddr5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_070lc"]
+shader = ExtResource("1_sf4dv")
+shader_parameter/blur_amount = 0.0
+shader_parameter/tint = Color(0, 0, 0, 1)
+shader_parameter/tint_strength = 0.0
+shader_parameter/saturation = 1.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseScreen" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_m852v")
+
+[node name="Bluecolorrect" type="ColorRect" parent="CanvasLayer/PauseScreen"]
+material = SubResource("ShaderMaterial_070lc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9713355, 0.9713355, 0.9713355, 1)
+
+[node name="UIPanelcontainer" type="PanelContainer" parent="CanvasLayer/PauseScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -177.0
+offset_top = -148.0
+offset_right = 136.0
+offset_bottom = 114.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseScreen/UIPanelcontainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseScreen/UIPanelcontainer/VBoxContainer"]
+layout_mode = 2
+text = "Pause"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/PauseScreen/UIPanelcontainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseScreen/UIPanelcontainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="Resumebutton" type="Button" parent="CanvasLayer/PauseScreen/UIPanelcontainer/VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume
+"
+
+[node name="Quitbutton" type="Button" parent="CanvasLayer/PauseScreen/UIPanelcontainer/VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
