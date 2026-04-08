@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5w2ci8vo1vg5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njsvn"]
+size = Vector2(7, 32)
+
+[node name="Checkpoint" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_njsvn")
+
+[node name="RespawnPoint" type="Marker2D" parent="."]
+position = Vector2(6, -25)

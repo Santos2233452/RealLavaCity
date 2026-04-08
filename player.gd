@@ -36,6 +36,9 @@ func get_input():
 	elif input_direction.y < 0:
 		current_dir = "up"
 
+	if position.y > 900:
+		get_tree().change_scene_to_file("res://play_again.tscn")
+
 	# Listen for attack input (Must be capitalized 'Input')
 	if Input.is_action_just_pressed("attack") and not attack_ip:
 		attack()

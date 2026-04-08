@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1rph031rno47"]
+
+[ext_resource type="Texture2D" uid="uid://cfv1u86mw0ru5" path="res://icon.svg" id="1_3ed3y"]
+[ext_resource type="Script" uid="uid://ua8xuesj2eqa" path="res://apple.gd" id="1_n78qv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n78qv"]
+size = Vector2(4, 4)
+
+[node name="apple" type="Node2D"]
+script = ExtResource("1_n78qv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.3841858e-07, 2.3841858e-07)
+scale = Vector2(0.025390623, 0.02734369)
+texture = ExtResource("1_3ed3y")
+
+[node name="pickable_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pickable_area"]
+shape = SubResource("RectangleShape2D_n78qv")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[connection signal="body_entered" from="pickable_area" to="." method="_on_pickable_area_body_entered"]
