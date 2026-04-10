@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://db2s4ricupw3m"]
+
+[ext_resource type="Script" uid="uid://2o01eg8sqnr4" path="res://small_platfrom.gd" id="1_3ll36"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2aq0"]
+size = Vector2(42, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qm34t"]
+size = Vector2(42, 20)
+
+[node name="small platfrom" type="StaticBody2D"]
+script = ExtResource("1_3ll36")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.46238184, 0.9912036, 0.872032, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(19, 19)
+shape = SubResource("RectangleShape2D_c2aq0")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(19, 8)
+shape = SubResource("RectangleShape2D_qm34t")
+debug_color = Color(0.51846355, 0.4546693, 0.9113947, 0.41960785)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0fhasy0kyrtk"]
+
+[ext_resource type="Script" uid="uid://cjkomh4gy56ab" path="res://meteorite.gd" id="1_cwyac"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rltli"]
+size = Vector2(45, 45)
+
+[node name="Meteorite" type="Area2D"]
+position = Vector2(88, 8)
+script = ExtResource("1_cwyac")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(17.5, 17.5)
+shape = SubResource("RectangleShape2D_rltli")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

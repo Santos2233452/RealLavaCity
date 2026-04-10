@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpf3q4gvol2wo"]
+
+[ext_resource type="Script" uid="uid://cxx88y6y744rd" path="res://gun.gd" id="1_vk1bi"]
+
+[node name="Gun" type="Node2D"]
+position = Vector2(80, 72)
+script = ExtResource("1_vk1bi")
+
+[node name="RotationOffest" type="Node2D" parent="."]
+
+[node name="bottom" type="ColorRect" parent="."]
+offset_right = 24.0
+offset_bottom = 16.0
+metadata/_edit_use_anchors_ = true
+
+[node name="upthing" type="ColorRect" parent="."]
+offset_top = -16.0
+offset_right = 40.0
+
+[node name="Shootpos" type="Marker2D" parent="."]
+position = Vector2(32, -8)
+
+[node name="ShootTimer" type="Timer" parent="."]
+one_shot = true
