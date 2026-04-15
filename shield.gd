@@ -20,9 +20,8 @@ func deactivate_shield():
 	$Shield.set_collision_layer_bit(0, false)
 
 func _on_Shield_body_entered(body):
-	# Handle collision with enemy or projectiles
+	
 	if body.is_in_group("enemy") or body.is_in_group("projectile"):
-		# Shield absorbs damage, do not reduce health
-		# Optionally, destroy the projectile or enemy
+		
 		body.queue_free()
 	  

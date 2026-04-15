@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c0fhasy0kyrtk"]
 
-[ext_resource type="Script" uid="uid://cjkomh4gy56ab" path="res://meteorite.gd" id="1_cwyac"]
+[ext_resource type="Script" path="res://meteorite.gd" id="1_cwyac"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rltli"]
 size = Vector2(45, 45)

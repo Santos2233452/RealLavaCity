@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Lava City"
+config/name="Real Lava City"
 run/main_scene="uid://cihfo5jiwbem4"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
