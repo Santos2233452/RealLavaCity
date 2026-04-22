@@ -1,14 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cihfo5jiwbem4"]
+[gd_scene load_steps=6 format=3 uid="uid://cihfo5jiwbem4"]
 
 [ext_resource type="PackedScene" uid="uid://igx1pkue4kyt" path="res://player.tscn" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://cks6xktgwulcj" path="res://enemy.tscn" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://cgeqktkgrrd46" path="res://spikeball.tscn" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://c0fhasy0kyrtk" path="res://meteorite.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://ce3556v4bg3x7" path="res://saw_blade.tscn" id="5_ryrav"]
 
 [node name="game" type="Node2D"]
 
+[node name="saw blade" parent="." instance=ExtResource("5_ryrav")]
+position = Vector2(297, 178)
+
 [node name="player" parent="." instance=ExtResource("1_e2o6t")]
-position = Vector2(89, 169)
+position = Vector2(123, 237)
 
 [node name="enemy" parent="." instance=ExtResource("2_feb5d")]
 position = Vector2(870, 477)

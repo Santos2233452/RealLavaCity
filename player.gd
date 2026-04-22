@@ -94,3 +94,7 @@ func _on_deal_attack_timer_timeout() -> void:
 func _on_sword_area_entered(area: Area2D) -> void:
 	if area.is_in_group("hurtbox"):
 		area.take_damage()
+
+func hit(direction):
+	print("direction" , direction)
+	pass
