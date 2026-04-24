@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://gea5cb746r37"]
+
+[ext_resource type="Script" uid="uid://d3unp5usk3lj3" path="res://loading_screen.gd" id="1_htrc2"]
+[ext_resource type="Texture2D" uid="uid://bcmwkpf64ymsw" path="res://pixel art/red.png" id="1_mggpi"]
+
+[node name="loading screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_htrc2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -534.0
+offset_top = -290.0
+offset_right = 547.0
+offset_bottom = 313.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_mggpi")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -52.0
+offset_right = 150.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="loading" type="Label" parent="."]
+layout_mode = 0
+offset_left = 593.0
+offset_top = 168.0
+offset_right = 651.0
+offset_bottom = 191.0
+text = "loading"
+
+[node name="percentage_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 577.0
+offset_top = 408.0
+offset_right = 719.0
+offset_bottom = 458.0
+text = "1
+
+"
