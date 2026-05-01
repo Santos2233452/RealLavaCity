@@ -2,44 +2,65 @@ extends CharacterBody2D
 
 # Movement and Stats
 @export var speed = 400
+@export var jump_velocity = -600.0 # Adjust this for jump height
 
 var health = 100
 var health_max = 100 
 var player_alive = true
 var attack_ip = false 
-var current_dir = "down" 
-
+var current_dir = "right" # Changed default to right for platformer
 
 var enemy_inattack_range = false
 var enemy_attack_cooldown = true 
 
-func _physics_process(_delta):
+# Get the gravity from the project settings
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+func _physics_process(delta):
 	if player_alive:
+		# 1. Apply Gravity
+		if not is_on_floor():
+			velocity.y += gravity * delta
+
+		# 2. Handle Input & Jump
 		get_input()
+		
+		# 3. Apply Movement
 		move_and_slide()
+		
+		# 4. Combat Logic
 		enemy_attack_logic()
 		check_death()
 
 func get_input():
-	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * speed
+	# Horizontal movement only (Left/Right)
+	var direction = Input.get_axis("left", "right")
 	
-	
-	if input_direction.x > 0: current_dir = "right"
-	elif input_direction.x < 0: current_dir = "left"
-	elif input_direction.y > 0: current_dir = "down"
-	elif input_direction.y < 0: current_dir = "up"
+	if direction:
+		velocity.x = direction * speed
+		current_dir = "right" if direction > 0 else "left"
+	else:
+		# Smoothly stop horizontal movement
+		velocity.x = move_toward(velocity.x, 0, speed)
 
-	if position.y > 900:
-		get_tree().change_scene_to_file("res://play_again.tscn")
+	# Handle Jumping (Only if on the floor)
+	if Input.is_action_just_pressed("up") and is_on_floor():
+		velocity.y = jump_velocity
 
+	# Attack Input
 	if Input.is_action_just_pressed("attack") and not attack_ip:
 		attack()
+
+	# Fall off map detection
+	if position.y > 900:
+		get_tree().change_scene_to_file("res://play_again.tscn")
 
 func attack():
 	attack_ip = true
 	print("Attacking: ", current_dir)
-	$deal_attack_timer.start() 
+	# Ensure you have a timer node named 'deal_attack_timer'
+	if has_node("deal_attack_timer"):
+		$deal_attack_timer.start() 
 
 func enemy_attack_logic():
 	if enemy_inattack_range and enemy_attack_cooldown:
@@ -50,35 +71,30 @@ func check_death():
 		player_alive = false
 		health = 0
 		print("Player has been killed")
-		# Switch to the play again screen
 		get_tree().change_scene_to_file("res://play_again.tscn")
-
-
 
 # This handles the Saw Blade's specific call
 func hit(direction):
 	if player_alive:
-		# 1. Apply Damage
 		health -= 20
 		print("Hit by saw! Health: ", health)
 		
-		# 2. Apply Knockback 
-		# We force the velocity based on the direction the saw calculated
+		# Apply Knockback 
 		velocity.x = direction * 800
-		velocity.y = -200
+		velocity.y = -300 # A little pop upwards when hit
 		
-		# 3. Visual Feedback
+		# Visual Feedback
 		modulate = Color.RED
 		await get_tree().create_timer(0.1).timeout
 		modulate = Color.WHITE
 		
 		check_death()
 
-# Helper for standard enemy attacks
 func take_damage(amount):
 	health -= amount
 	enemy_attack_cooldown = false
-	$attack_cooldown.start()
+	if has_node("attack_cooldown"):
+		$attack_cooldown.start()
 	print("Player Health: ", health)
 
 # --- Signal Connections ---
