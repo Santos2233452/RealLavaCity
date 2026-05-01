@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://biihfugworho7"]
+
+[ext_resource type="Texture2D" uid="uid://chl5jrs53nsih" path="res://pixel art/for invertory .png" id="1_c24ra"]
+
+[node name="Slot" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(20, 20)
+offset_right = 29.0
+offset_bottom = 30.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, -1)
+texture = ExtResource("1_c24ra")
+centered = false

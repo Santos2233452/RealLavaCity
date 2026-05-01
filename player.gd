@@ -3,17 +3,15 @@ extends CharacterBody2D
 # Movement and Stats
 @export var speed = 400
 
-
 var health = 100
 var health_max = 100 
-var health_min = 0
 var player_alive = true
-var attack_ip = false # Attack In Progress
-var current_dir = "down" # Stores which way we are facing
+var attack_ip = false 
+var current_dir = "down" 
 
-# Combat Logic
+
 var enemy_inattack_range = false
-var enemy_attack_cooldown = true # Start as true so the first hit registers
+var enemy_attack_cooldown = true 
 
 func _physics_process(_delta):
 	if player_alive:
@@ -26,52 +24,62 @@ func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
 	
-	# Update direction for the attack logic
-	if input_direction.x > 0:
-		current_dir = "right"
-	elif input_direction.x < 0:
-		current_dir = "left"
-	elif input_direction.y > 0:
-		current_dir = "down"
-	elif input_direction.y < 0:
-		current_dir = "up"
+	
+	if input_direction.x > 0: current_dir = "right"
+	elif input_direction.x < 0: current_dir = "left"
+	elif input_direction.y > 0: current_dir = "down"
+	elif input_direction.y < 0: current_dir = "up"
 
 	if position.y > 900:
 		get_tree().change_scene_to_file("res://play_again.tscn")
 
-	# Listen for attack input (Must be capitalized 'Input')
 	if Input.is_action_just_pressed("attack") and not attack_ip:
 		attack()
 
 func attack():
 	attack_ip = true
-	# If you have a global script: global.player_current_attack = true 
-	
 	print("Attacking: ", current_dir)
-	
-	# Start the timer to reset the attack state
 	$deal_attack_timer.start() 
-	
-	# This is where you would trigger your AnimationPlayer
-	# if current_dir == "right": $AnimationPlayer.play("attack_right")
 
 func enemy_attack_logic():
 	if enemy_inattack_range and enemy_attack_cooldown:
-		health -= 20
-		enemy_attack_cooldown = false
-		$attack_cooldown.start()
-		print("Player Health: ", health)
+		take_damage(20) 
 
 func check_death():
-	if health <= 0:
+	if health <= 0 and player_alive:
 		player_alive = false
 		health = 0
 		print("Player has been killed")
-		self.queue_free()
+		# Switch to the play again screen
+		get_tree().change_scene_to_file("res://play_again.tscn")
 
-# Identification function (keep this at the left margin)
-func player():
-	pass
+
+
+# This handles the Saw Blade's specific call
+func hit(direction):
+	if player_alive:
+		# 1. Apply Damage
+		health -= 20
+		print("Hit by saw! Health: ", health)
+		
+		# 2. Apply Knockback 
+		# We force the velocity based on the direction the saw calculated
+		velocity.x = direction * 800
+		velocity.y = -200
+		
+		# 3. Visual Feedback
+		modulate = Color.RED
+		await get_tree().create_timer(0.1).timeout
+		modulate = Color.WHITE
+		
+		check_death()
+
+# Helper for standard enemy attacks
+func take_damage(amount):
+	health -= amount
+	enemy_attack_cooldown = false
+	$attack_cooldown.start()
+	print("Player Health: ", health)
 
 # --- Signal Connections ---
 
@@ -87,14 +95,4 @@ func _on_attack_cooldown_timeout() -> void:
 	enemy_attack_cooldown = true
 
 func _on_deal_attack_timer_timeout() -> void:
-	# global.player_current_attack = false
 	attack_ip = false
-
-
-func _on_sword_area_entered(area: Area2D) -> void:
-	if area.is_in_group("hurtbox"):
-		area.take_damage()
-
-func hit(direction):
-	print("direction" , direction)
-	pass
