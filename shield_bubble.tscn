@@ -7,9 +7,11 @@
 script = ExtResource("1_v0kuw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(236, 178)
-scale = Vector2(3.140625, 1.921875)
+position = Vector2(-2, -19.187504)
+scale = Vector2(3.9648438, 2.8378904)
 texture = ExtResource("2_ttxif")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

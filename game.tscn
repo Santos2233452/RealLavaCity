@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cihfo5jiwbem4"]
+[gd_scene load_steps=12 format=3 uid="uid://cihfo5jiwbem4"]
 
 [ext_resource type="PackedScene" uid="uid://igx1pkue4kyt" path="res://player.tscn" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://c0gc5mg5ty70o" path="res://game.gd" id="1_j5wjh"]
@@ -9,7 +9,8 @@
 [ext_resource type="Script" uid="uid://cct76tmhluroc" path="res://canvas_layer.gd" id="6_eow3j"]
 [ext_resource type="PackedScene" uid="uid://qbmyx7vojr0" path="res://inventory_gui.tscn" id="6_ryrav"]
 [ext_resource type="PackedScene" uid="uid://c22y3j3mi4pf4" path="res://red floor.tscn" id="9_vef74"]
-[ext_resource type="PackedScene" uid="uid://cwj70oq0mr0s5" path="res://shield.tscn" id="10_hve3p"]
+[ext_resource type="PackedScene" uid="uid://b3o2brl8jsveb" path="res://shield_item.tscn" id="10_hve3p"]
+[ext_resource type="PackedScene" uid="uid://cp63f58t6m2da" path="res://shield_bubble.tscn" id="11_mfdv2"]
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_j5wjh")
@@ -45,8 +46,9 @@ position = Vector2(-177, 399)
 [node name="Meteorite" parent="." instance=ExtResource("5_7jktm")]
 position = Vector2(-482, -400)
 
-[node name="Shield" parent="." instance=ExtResource("10_hve3p")]
-position = Vector2(-190, 149)
+[node name="ShieldItem" parent="." instance=ExtResource("10_hve3p")]
+position = Vector2(-108, 212)
+bubble_scene = ExtResource("11_mfdv2")
 
 [connection signal="closed" from="CanvasLayer/InventoryGui" to="." method="_on_inventory_gui_closed"]
 [connection signal="opened" from="CanvasLayer/InventoryGui" to="." method="_on_inventory_gui_opened"]

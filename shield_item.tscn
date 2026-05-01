@@ -7,6 +7,7 @@
 radius = 33.06055
 
 [node name="ShieldItem" type="Area2D"]
+collision_layer = 3
 script = ExtResource("1_i43of")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -17,3 +18,5 @@ texture = ExtResource("1_xu2vu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(192, 159)
 shape = SubResource("CircleShape2D_i43of")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
