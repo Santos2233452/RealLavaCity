@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgeqktkgrrd46"]
+[gd_scene load_steps=10 format=3 uid="uid://cgeqktkgrrd46"]
 
-[ext_resource type="Script" path="res://spikeball.gd" id="1_buv6i"]
+[ext_resource type="Script" uid="uid://dwx5sgeobd7g8" path="res://spikeball.gd" id="1_buv6i"]
 [ext_resource type="Texture2D" uid="uid://48jhqi5lb67n" path="res://spike ball .png" id="1_ey4ox"]
 [ext_resource type="Texture2D" uid="uid://ct4ikxd7rdblq" path="res://Chain.png" id="1_u711t"]
 
@@ -62,6 +62,9 @@ _data = {
 &"RESET": SubResource("Animation_drphv")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_i010k"]
+radius = 42.107006
+
 [node name="Spikeball" type="AnimatableBody2D"]
 script = ExtResource("1_buv6i")
 
@@ -94,3 +97,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_ow70x")
 }
 autoplay = "Halfswing"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 140)
+shape = SubResource("CircleShape2D_i010k")
+debug_color = Color(0.7813103, 0.2234304, 0.50723743, 0.41960785)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

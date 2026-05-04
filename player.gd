@@ -2,76 +2,95 @@ extends CharacterBody2D
 
 # Movement and Stats
 @export var speed = 400
-
+@export var jump_velocity = -600.0 
 
 var health = 100
 var health_max = 100 
-var health_min = 0
 var player_alive = true
-var attack_ip = false # Attack In Progress
-var current_dir = "down" # Stores which way we are facing
+var attack_ip = false 
+var current_dir = "right" 
 
-# Combat Logic
 var enemy_inattack_range = false
-var enemy_attack_cooldown = true # Start as true so the first hit registers
+var enemy_attack_cooldown = true 
 
-func _physics_process(_delta):
+# Get the gravity from the project settings
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+func _physics_process(delta):
 	if player_alive:
+		if not is_on_floor():
+			velocity.y += gravity * delta
+
 		get_input()
 		move_and_slide()
 		enemy_attack_logic()
 		check_death()
 
 func get_input():
-	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * speed
+	var direction = Input.get_axis("left", "right")
 	
-	# Update direction for the attack logic
-	if input_direction.x > 0:
-		current_dir = "right"
-	elif input_direction.x < 0:
-		current_dir = "left"
-	elif input_direction.y > 0:
-		current_dir = "down"
-	elif input_direction.y < 0:
-		current_dir = "up"
+	if direction:
+		velocity.x = direction * speed
+		current_dir = "right" if direction > 0 else "left"
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed)
+
+	if Input.is_action_just_pressed("up") and is_on_floor():
+		velocity.y = jump_velocity
+
+	if Input.is_action_just_pressed("attack") and not attack_ip:
+		attack()
 
 	if position.y > 900:
 		get_tree().change_scene_to_file("res://play_again.tscn")
 
-	# Listen for attack input (Must be capitalized 'Input')
-	if Input.is_action_just_pressed("attack") and not attack_ip:
-		attack()
-
 func attack():
 	attack_ip = true
-	# If you have a global script: global.player_current_attack = true 
-	
-	print("Attacking: ", current_dir)
-	
-	# Start the timer to reset the attack state
-	$deal_attack_timer.start() 
-	
-	# This is where you would trigger your AnimationPlayer
-	# if current_dir == "right": $AnimationPlayer.play("attack_right")
+	if has_node("deal_attack_timer"):
+		$deal_attack_timer.start() 
 
 func enemy_attack_logic():
 	if enemy_inattack_range and enemy_attack_cooldown:
-		health -= 20
-		enemy_attack_cooldown = false
-		$attack_cooldown.start()
-		print("Player Health: ", health)
+		take_damage(20) 
 
 func check_death():
-	if health <= 0:
+	if health <= 0 and player_alive:
 		player_alive = false
 		health = 0
-		print("Player has been killed")
-		self.queue_free()
+		get_tree().change_scene_to_file("res://play_again.tscn")
 
-# Identification function (keep this at the left margin)
-func player():
-	pass
+# --- UPDATED DAMAGE FUNCTIONS ---
+
+func hit(direction):
+	if player_alive:
+		# SHIELD CHECK: Skip damage if shield exists
+		if has_node("ActiveShield"):
+			print("Shield blocked the saw!")
+			return
+			
+		health -= 20
+		velocity.x = direction * 800
+		velocity.y = -300 
+		
+		# Visual Feedback
+		modulate = Color.RED
+		await get_tree().create_timer(0.1).timeout
+		modulate = Color.WHITE
+		
+		check_death()
+
+func take_damage(amount):
+	# SHIELD CHECK: Skip damage if shield exists
+	if has_node("ActiveShield"):
+		print("Shield absorbed the hit!")
+		return
+
+	health -= amount
+	enemy_attack_cooldown = false
+	if has_node("attack_cooldown"):
+		$attack_cooldown.start()
+	print("Player Health: ", health)
+	check_death()
 
 # --- Signal Connections ---
 
@@ -87,10 +106,4 @@ func _on_attack_cooldown_timeout() -> void:
 	enemy_attack_cooldown = true
 
 func _on_deal_attack_timer_timeout() -> void:
-	# global.player_current_attack = false
 	attack_ip = false
-
-
-func _on_sword_area_entered(area: Area2D) -> void:
-	if area.is_in_group("hurtbox"):
-		area.take_damage()

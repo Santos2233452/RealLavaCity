@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2wysnl22l4k3"]
+
+[ext_resource type="Script" uid="uid://cdkc6mroaahdi" path="res://pause.gd" id="1_45vjg"]
+
+[node name="pause" type="CanvasLayer"]
+
+[node name="pause" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1149.0
+offset_bottom = 655.0
+script = ExtResource("1_45vjg")
+
+[node name="ColorRect" type="ColorRect" parent="pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0963244, 0.0963244, 0.0963244, 0.48235294)
+
+[node name="Continue" type="Button" parent="pause"]
+layout_mode = 0
+offset_left = 402.0
+offset_top = 180.0
+offset_right = 711.0
+offset_bottom = 275.0
+text = "Continue
+"
+
+[node name="Quit" type="Button" parent="pause"]
+layout_mode = 0
+offset_left = 405.0
+offset_top = 283.0
+offset_right = 714.0
+offset_bottom = 378.0
+text = "Quit
+"
+
+[connection signal="pressed" from="pause/Continue" to="pause" method="_on_continue_pressed"]
+[connection signal="pressed" from="pause/Quit" to="pause" method="_on_quit_pressed"]

@@ -1,16 +1,37 @@
+<<<<<<< HEAD
 [gd_scene load_steps=5 format=3 uid="uid://cihfo5jiwbem4"]
+=======
+[gd_scene load_steps=12 format=3 uid="uid://cihfo5jiwbem4"]
+>>>>>>> 86ccfad6fe7e9775898213ef291006c794a9a991
 
 [ext_resource type="PackedScene" uid="uid://igx1pkue4kyt" path="res://player.tscn" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://c0gc5mg5ty70o" path="res://game.gd" id="1_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://cks6xktgwulcj" path="res://enemy.tscn" id="2_feb5d"]
+<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://dxna1yung6w75" path="res://wood.tscn" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://ctaskauo3vr4e" path="res://fire_enemys.tscn" id="4_fc0e3"]
+=======
+[ext_resource type="PackedScene" uid="uid://cgeqktkgrrd46" path="res://spikeball.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://c0fhasy0kyrtk" path="res://meteorite.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://ce3556v4bg3x7" path="res://saw_blade.tscn" id="5_ryrav"]
+[ext_resource type="Script" uid="uid://cct76tmhluroc" path="res://canvas_layer.gd" id="6_eow3j"]
+[ext_resource type="PackedScene" uid="uid://qbmyx7vojr0" path="res://inventory_gui.tscn" id="6_ryrav"]
+[ext_resource type="PackedScene" uid="uid://c22y3j3mi4pf4" path="res://red floor.tscn" id="9_vef74"]
+[ext_resource type="PackedScene" uid="uid://b3o2brl8jsveb" path="res://shield_item.tscn" id="10_hve3p"]
+[ext_resource type="PackedScene" uid="uid://cp63f58t6m2da" path="res://shield_bubble.tscn" id="11_mfdv2"]
+>>>>>>> 86ccfad6fe7e9775898213ef291006c794a9a991
 
 [node name="game" type="Node2D"]
+script = ExtResource("1_j5wjh")
+
+[node name="saw blade" parent="." instance=ExtResource("5_ryrav")]
+position = Vector2(297, 178)
 
 [node name="player" parent="." instance=ExtResource("1_e2o6t")]
-position = Vector2(89, 169)
+position = Vector2(-36, 344)
 
 [node name="enemy" parent="." instance=ExtResource("2_feb5d")]
+<<<<<<< HEAD
 position = Vector2(910, 151)
 
 [node name="wood" parent="." instance=ExtResource("3_feb5d")]
@@ -18,3 +39,35 @@ position = Vector2(135, 571)
 
 [node name="Fire enemys" parent="." instance=ExtResource("4_fc0e3")]
 position = Vector2(366, 541)
+=======
+position = Vector2(870, 477)
+
+[node name="Spikeball" parent="." instance=ExtResource("3_feb5d")]
+position = Vector2(438, 18)
+
+[node name="Spikeball2" parent="." instance=ExtResource("3_feb5d")]
+position = Vector2(270, 403)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("6_eow3j")
+
+[node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("6_ryrav")]
+offset_left = 237.0
+offset_top = -147.0
+offset_right = 440.0
+offset_bottom = -17.0
+
+[node name="StaticBody2D" parent="." instance=ExtResource("9_vef74")]
+position = Vector2(-177, 399)
+
+[node name="Meteorite" parent="." instance=ExtResource("5_7jktm")]
+position = Vector2(-482, -400)
+
+[node name="ShieldItem" parent="." instance=ExtResource("10_hve3p")]
+position = Vector2(-108, 212)
+bubble_scene = ExtResource("11_mfdv2")
+
+[connection signal="closed" from="CanvasLayer/InventoryGui" to="." method="_on_inventory_gui_closed"]
+[connection signal="opened" from="CanvasLayer/InventoryGui" to="." method="_on_inventory_gui_opened"]
+>>>>>>> 86ccfad6fe7e9775898213ef291006c794a9a991

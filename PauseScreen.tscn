@@ -27,7 +27,7 @@ shader_parameter/tint = Color(0, 0, 0, 1)
 shader_parameter/tint_strength = 0.0
 shader_parameter/saturation = 1.0
 
-[node name="Node2D" type="Node2D"]
+[node name="PauseScreen" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
