@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cihfo5jiwbem4"]
+[gd_scene load_steps=5 format=3 uid="uid://cihfo5jiwbem4"]
 
 [ext_resource type="PackedScene" uid="uid://igx1pkue4kyt" path="res://player.tscn" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://cks6xktgwulcj" path="res://enemy.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dxna1yung6w75" path="res://wood.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://ctaskauo3vr4e" path="res://fire_enemys.tscn" id="4_fc0e3"]
 
 [node name="game" type="Node2D"]
 
@@ -9,4 +11,10 @@
 position = Vector2(89, 169)
 
 [node name="enemy" parent="." instance=ExtResource("2_feb5d")]
-position = Vector2(474, 202)
+position = Vector2(910, 151)
+
+[node name="wood" parent="." instance=ExtResource("3_feb5d")]
+position = Vector2(135, 571)
+
+[node name="Fire enemys" parent="." instance=ExtResource("4_fc0e3")]
+position = Vector2(366, 541)

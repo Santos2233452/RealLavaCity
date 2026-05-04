@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxna1yung6w75"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_r6l5q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6l5q"]
+size = Vector2(399, 97)
+
+[node name="wood" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_r6l5q")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 393.0
+offset_bottom = 90.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(198.5, 45.5)
+shape = SubResource("RectangleShape2D_r6l5q")
